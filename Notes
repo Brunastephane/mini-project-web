@@ -1,0 +1,19 @@
+/* HOW TO USE NAVIGATE:
+
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+function Index() {
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/books");
+  });
+
+  return <div>Main Page</div>;
+}
+
+export default Index;
+
+
+*/
