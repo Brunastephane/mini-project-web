@@ -1,7 +1,7 @@
 import React from "react";
 
-function Index() {
+function Contact() {
   return <div>Contact Page</div>;
 }
 
-export default Index;
+export default Contact;

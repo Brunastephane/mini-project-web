@@ -1,7 +1,7 @@
 import React from "react";
 
-function Index() {
+function Books() {
   return <div>Index Books</div>;
 }
 
-export default Index;
+export default Books;

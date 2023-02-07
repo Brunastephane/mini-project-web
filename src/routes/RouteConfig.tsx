@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Main from "../pages/Main/Index";
-import Books from "../pages/Books/Index";
+import Main from "../pages/Main/Main";
+import Books from "../pages/Books/Books";
 
 function RouteConfig() {
   return (
