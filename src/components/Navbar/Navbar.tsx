@@ -12,13 +12,14 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const pages = ["Home", "Books", "Contact"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -85,11 +86,27 @@ function Navbar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                <Typography textAlign="center">Home</Typography>
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  navigate("/books");
+                }}
+              >
+                <Typography textAlign="center">Books</Typography>
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  navigate("/contact");
+                }}
+              >
+                <Typography textAlign="center">Contact</Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -110,15 +127,27 @@ function Navbar() {
             BOOKOLOGY
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+            <MenuItem
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <Typography textAlign="center">Home</Typography>
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                navigate("/books");
+              }}
+            >
+              <Typography textAlign="center">Books</Typography>
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                navigate("/contact");
+              }}
+            >
+              <Typography textAlign="center">Contact</Typography>
+            </MenuItem>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
