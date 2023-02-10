@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {
@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useParams } from "react-router-dom";
 
 const booksQuery = [
   {
@@ -48,12 +49,21 @@ const booksQuery = [
 ];
 
 function Book() {
-  const [book, setBook] = useState(booksQuery[1]);
-  const [love, setLove] = useState(false);
-  const [comments, setComments] = useState<any | null>();
-  const [name, setName] = useState<string>();
-  const [rating, setRating] = useState<number | null>();
-  const [review, setReview] = useState<string>();
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [book, setBook] = useState<any>(booksQuery[0]);
+  const [love, setLove] = useState<boolean>(false);
+  const [comments, setComments] = useState<any | null>([]);
+  const [name, setName] = useState<string>("");
+  const [rating, setRating] = useState<number | null>(null);
+  const [review, setReview] = useState<string>("");
+
+  useLayoutEffect(() => {
+    if (loading && id) {
+      setBook(booksQuery[parseInt(id)]);
+      setLoading(false);
+    }
+  });
 
   const handleLove = () => {
     if (!love) {
@@ -65,13 +75,7 @@ function Book() {
 
   const handleSubmit = () => {
     let data = { name: name, rating: rating, review: review };
-    if (comments) {
-      let concatenateComments = [...comments, data];
-      console.log(concatenateComments);
-      setComments(concatenateComments);
-    } else {
-      setComments([data]);
-    }
+    setComments([...comments, data]);
   };
 
   return (
@@ -148,7 +152,6 @@ function Book() {
                   <Rating
                     precision={0.1}
                     name="size-medium"
-                    defaultValue={0}
                     max={10}
                     value={rating}
                     onChange={(event, newValue) => {
@@ -182,30 +185,29 @@ function Book() {
               </Grid>
             </Grid>
           </Paper>
-          {comments &&
-            comments.map((comment: any) => {
-              <Paper sx={{ p: "15px", mt: "10px" }}>
-                <Grid container spacing={2}>
-                  <Grid item xs={5}>
-                    <Typography>Name:{comment.name}</Typography>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Stack sx={{ mt: "15px" }}>
-                      <Rating
-                        precision={0.1}
-                        name="size-medium"
-                        max={10}
-                        value={comment.rating}
-                      />
-                    </Stack>
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <Typography>Review:{comment.review}</Typography>
-                  </Grid>
+          {comments.map((comment: any) => (
+            <Paper sx={{ p: "15px", mt: "10px" }}>
+              <Grid container spacing={2}>
+                <Grid item xs={5}>
+                  <Typography>Name:{comment.name}</Typography>
                 </Grid>
-              </Paper>;
-            })}
+                <Grid item xs={4}>
+                  <Stack sx={{ mt: "15px" }}>
+                    <Rating
+                      precision={0.1}
+                      name="size-medium"
+                      max={10}
+                      value={comment.rating}
+                    />
+                  </Stack>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Typography>Review:{comment.review}</Typography>
+                </Grid>
+              </Grid>
+            </Paper>
+          ))}
         </Grid>
       </Grid>
     </Container>

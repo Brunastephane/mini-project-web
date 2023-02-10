@@ -45,7 +45,7 @@ function Books() {
       </Typography>
 
       <Grid container spacing={2} sx={{ paddingTop: "40px" }}>
-        {booksQuery.map((book) => DisplayBook(book))}
+        {booksQuery.map((book, index) => DisplayBook(book, index))}
       </Grid>
     </Container>
   );

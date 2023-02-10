@@ -4,13 +4,11 @@ import React from "react";
 
 function Footer() {
   return (
-    <Container
-      sx={{ justifyContent: "center", alignItems: "bottom", display: "flex" }}
-    >
-      <Typography sx={{ position: "absolute", bottom: "10px" }}>
+    <footer>
+      <Typography sx={{ textAlign: "center", mt: "50px", mb: "20px" }}>
         ©Copyright Bookology - All rights reserved.
       </Typography>
-    </Container>
+    </footer>
   );
 }
 

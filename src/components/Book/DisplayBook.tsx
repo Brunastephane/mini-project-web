@@ -13,11 +13,19 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import { useNavigate } from "react-router-dom";
 
-const DisplayBook = (book: any) => {
+const DisplayBook = (book: any, index: number) => {
+  const navigate = useNavigate();
+  const id = index;
   return (
     <Grid item xs={6}>
-      <Card sx={{ display: "flex" }}>
+      <Card
+        sx={{ display: "flex", cursor: "pointer" }}
+        onClick={() => {
+          navigate(`/book/${id}`);
+        }}
+      >
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography component="div" variant="h5">
