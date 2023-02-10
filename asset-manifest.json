@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/mini-project-web/static/css/main.3cf95d4c.css",
-    "main.js": "/mini-project-web/static/js/main.4a33b5a4.js",
+    "main.js": "/mini-project-web/static/js/main.58853dde.js",
     "static/media/roboto-all-500-normal.woff": "/mini-project-web/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
     "static/media/roboto-all-700-normal.woff": "/mini-project-web/static/media/roboto-all-700-normal.a457fde362a540fcadff.woff",
     "static/media/roboto-all-400-normal.woff": "/mini-project-web/static/media/roboto-all-400-normal.c5d001fa922fa66a147f.woff",
@@ -36,10 +36,10 @@
     "static/media/roboto-greek-ext-700-normal.woff2": "/mini-project-web/static/media/roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2",
     "index.html": "/mini-project-web/index.html",
     "main.3cf95d4c.css.map": "/mini-project-web/static/css/main.3cf95d4c.css.map",
-    "main.4a33b5a4.js.map": "/mini-project-web/static/js/main.4a33b5a4.js.map"
+    "main.58853dde.js.map": "/mini-project-web/static/js/main.58853dde.js.map"
   },
   "entrypoints": [
     "static/css/main.3cf95d4c.css",
-    "static/js/main.4a33b5a4.js"
+    "static/js/main.58853dde.js"
   ]
 }
