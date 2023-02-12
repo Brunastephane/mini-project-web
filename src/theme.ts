@@ -40,6 +40,13 @@ const DefaultTheme = createTheme({
     MuiRating: {
       styleOverrides: {},
     },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#ffd8d8",
+        },
+      },
+    },
   },
   palette: {
     background: {
