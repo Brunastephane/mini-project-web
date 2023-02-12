@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {
+  Alert,
   Container,
   Grid,
   Paper,
@@ -84,6 +85,7 @@ function Book() {
       setName("");
       setRating(null);
       setReview("");
+      setMessage("");
     } else {
       setMessage("Complete all fields to submit your comment.");
     }
@@ -151,7 +153,7 @@ function Book() {
             Comments
           </Typography>
           <Paper sx={{ p: "15px", mt: "10px" }}>
-            {message}
+            {message != "" && <Alert severity="error">{message}</Alert>}
             <Grid container spacing={2}>
               <Grid item xs={5}>
                 <TextField
