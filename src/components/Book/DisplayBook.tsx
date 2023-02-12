@@ -17,13 +17,13 @@ import { useNavigate } from "react-router-dom";
 
 const DisplayBook = (book: any, index: number) => {
   const navigate = useNavigate();
-  const id = index;
+
   return (
     <Grid item xs={6}>
       <Card
         sx={{ display: "flex", cursor: "pointer" }}
         onClick={() => {
-          navigate(`/book/${id}`);
+          navigate(`/book/${index}`);
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column" }}>

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {
@@ -49,21 +49,25 @@ const booksQuery = [
 ];
 
 function Book() {
-  const { id } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [book, setBook] = useState<any>(booksQuery[0]);
+  const [book, setBook] = useState<any>([]);
   const [love, setLove] = useState<boolean>(false);
   const [comments, setComments] = useState<any | null>([]);
   const [name, setName] = useState<string>("");
   const [rating, setRating] = useState<number | null>(null);
   const [review, setReview] = useState<string>("");
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
+
+  const { id } = useParams();
 
   useLayoutEffect(() => {
-    if (loading && id) {
-      setBook(booksQuery[parseInt(id)]);
+    console.log(id);
+    if (id && loading) {
+      // verifica se tem Id e se a pagina esta em carregamento se sim altera o state book e altera o state loading para false
       setLoading(false);
+      setBook(booksQuery[parseInt(id)]);
     }
-  });
+  }, [id, loading]); // Passar condicoes que sao utilizadas no if no final do UseLayoutEffect ou UseEffect
 
   const handleLove = () => {
     if (!love) {
@@ -74,8 +78,15 @@ function Book() {
   };
 
   const handleSubmit = () => {
-    let data = { name: name, rating: rating, review: review };
-    setComments([...comments, data]);
+    if (name != "" && rating != null && review != "") {
+      let data = { name: name, rating: rating, review: review };
+      setComments([...comments, data]);
+      setName("");
+      setRating(null);
+      setReview("");
+    } else {
+      setMessage("Complete all fields to submit your comment.");
+    }
   };
 
   return (
@@ -87,7 +98,11 @@ function Book() {
 
       <Grid container spacing={2} sx={{ paddingTop: "40px" }}>
         <Grid item xs={3}>
-          <img src={book.bookImage} style={{ width: "100%" }} />
+          <img
+            alt={book.bookName}
+            src={book.bookImage}
+            style={{ width: "100%" }}
+          />
           <Button
             variant="contained"
             color="primary"
@@ -136,6 +151,7 @@ function Book() {
             Comments
           </Typography>
           <Paper sx={{ p: "15px", mt: "10px" }}>
+            {message}
             <Grid container spacing={2}>
               <Grid item xs={5}>
                 <TextField
