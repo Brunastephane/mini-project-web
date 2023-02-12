@@ -12,21 +12,21 @@ const DefaultTheme = createTheme({
     MuiSvgIcon: {
       styleOverrides: {
         root: {
-          //color: "#ffffff",
+          //color: "#F9F5E7",
         },
       },
     },
     MuiTypography: {
       styleOverrides: {
         h5: {
-          //color: "#ffffff !important"
+          //color: "#F9F5E7 !important"
         },
       },
     },
     MuiButtonBase: {
       styleOverrides: {
         root: {
-          color: "#ffffff ",
+          color: "#F9F5E7 ",
         },
       },
     },
@@ -54,12 +54,12 @@ const DefaultTheme = createTheme({
     },
 
     primary: {
-      light: "#ffffff",
+      light: "#F9F5E7",
       main: "#ffd8d8",
       dark: "#ffa5a5",
     },
     secondary: {
-      light: "#ffffff",
+      light: "#F9F5E7",
       main: "#493e57",
       dark: "#302939",
     },
