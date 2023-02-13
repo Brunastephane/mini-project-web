@@ -44,7 +44,7 @@ function Navbar() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/mini-project-web/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -56,7 +56,6 @@ function Navbar() {
           >
             BOOKOLOGY
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -88,21 +87,21 @@ function Navbar() {
             >
               <MenuItem
                 onClick={() => {
-                  navigate("/");
+                  navigate("/mini-project-web/");
                 }}
               >
                 <Typography textAlign="center">Home</Typography>
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  navigate("/books");
+                  navigate("/mini-project-web/books");
                 }}
               >
                 <Typography textAlign="center">Books</Typography>
               </MenuItem>
               <MenuItem
                 onClick={() => {
-                  navigate("/contact");
+                  navigate("/mini-project-web/contact");
                 }}
               >
                 <Typography textAlign="center">Contact</Typography>
@@ -129,27 +128,27 @@ function Navbar() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <MenuItem
               onClick={() => {
-                navigate("/");
+                navigate("/mini-project-web/");
               }}
             >
               <Typography textAlign="center">Home</Typography>
             </MenuItem>
             <MenuItem
               onClick={() => {
-                navigate("/books");
+                navigate("/mini-project-web/books");
               }}
             >
               <Typography textAlign="center">Books</Typography>
             </MenuItem>
             <MenuItem
               onClick={() => {
-                navigate("/contact");
+                navigate("/mini-project-web/contact");
               }}
             >
               <Typography textAlign="center">Contact</Typography>
             </MenuItem>
           </Box>
-
+          {/*
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -183,6 +182,8 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
+              */}
+          s
         </Toolbar>
       </Container>
     </AppBar>

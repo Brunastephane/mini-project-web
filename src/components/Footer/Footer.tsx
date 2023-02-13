@@ -1,15 +1,18 @@
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 import React from "react";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+import "./Footer.scss";
 
-function Footer() {
+export default function Footer() {
   return (
-    <footer>
-      <Typography sx={{ textAlign: "center", mt: "50px", mb: "20px" }}>
-        ©Copyright Bookology - All rights reserved.
+    <div className="Footer">
+      <Typography variant="body2" color="text.secondary" align="center">
+        {"Copyright © "}
+        <Link color="inherit" href="#">
+          Bookology
+        </Link>{" "}
+        {new Date().getFullYear()}.
       </Typography>
-    </footer>
+    </div>
   );
 }
-
-export default Footer;

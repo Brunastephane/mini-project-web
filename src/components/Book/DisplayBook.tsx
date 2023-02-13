@@ -31,7 +31,7 @@ const DisplayBook = (book: any, index: number) => {
               variant="h5"
               sx={{ cursor: "pointer" }}
               onClick={() => {
-                navigate(`/book/${index}`);
+                navigate(`/mini-project-web/book/${index}`);
               }}
             >
               {book.bookName}
@@ -69,7 +69,7 @@ const DisplayBook = (book: any, index: number) => {
           image={book.bookImage}
           alt="Live from space album cover"
           onClick={() => {
-            navigate(`/book/${index}`);
+            navigate(`/mini-project-web/book/${index}`);
           }}
         />
       </Card>
