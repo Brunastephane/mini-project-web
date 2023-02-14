@@ -183,7 +183,6 @@ function Navbar() {
             </Menu>
           </Box>
               */}
-          s
         </Toolbar>
       </Container>
     </AppBar>
