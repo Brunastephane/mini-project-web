@@ -13,41 +13,7 @@ import {
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useParams } from "react-router-dom";
-
-const booksQuery = [
-  {
-    bookName:
-      "The Vanishing of Margaret Small: An uplifting and page-turning mystery",
-    bookImage: "https://m.media-amazon.com/images/I/41y+BnHcQ1L._SY346_.jpg",
-    bookAuthor: "Neil Alexander",
-    bookRating: 9,
-    bookLikes: 701,
-  },
-  {
-    bookName:
-      "How to Talk to Anyone: 92 Little Tricks for Big Success in Relationships",
-    bookImage: "https://m.media-amazon.com/images/I/41aI+vWAy6L._SY346_.jpg",
-    bookAuthor: "Leil Lowndes",
-    bookRating: 8,
-    bookLikes: 8980,
-  },
-  {
-    bookName:
-      "Just Say Yes: The BRAND NEW uplifting romantic comedy from Maxine Morrey",
-    bookImage: "https://m.media-amazon.com/images/I/51li226M5ML.jpg",
-    bookAuthor: "Maxine Morrey",
-    bookRating: 9.5,
-    bookLikes: 594,
-  },
-  {
-    bookName:
-      "The Little Blue Door: A perfect Greek island escapist summer read. A passionate love story – a heart-wrenching discovery. (Little Blue Door Series Book 1)",
-    bookImage: "https://m.media-amazon.com/images/I/51jQPcRygUL._SY346_.jpg",
-    bookAuthor: "Francesca Catlow",
-    bookRating: 9.8,
-    bookLikes: 687,
-  },
-];
+import { booksQuery } from "../../components/Book/BooksQuery";
 
 function Book() {
   const [book, setBook] = useState<any>([]);
@@ -55,6 +21,7 @@ function Book() {
   const [comments, setComments] = useState<any | null>([]);
   const [name, setName] = useState<string>("");
   const [rating, setRating] = useState<number | null>(null);
+  const [overallRating, setOverallRating] = useState<number | null>(null);
   const [review, setReview] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
@@ -62,13 +29,20 @@ function Book() {
   const { id } = useParams();
 
   useLayoutEffect(() => {
-    console.log(id);
     if (id && loading) {
       // verifica se tem Id e se a pagina esta em carregamento se sim altera o state book e altera o state loading para false
       setLoading(false);
       setBook(booksQuery[parseInt(id)]);
     }
   }, [id, loading]); // Passar condicoes que sao utilizadas no if no final do UseLayoutEffect ou UseEffect
+
+  useEffect(() => {
+    if (comments) {
+      let sum = 0;
+      comments.map((comment: any) => (sum = sum + comment.rating));
+      setOverallRating(sum / comments.length);
+    }
+  }, [comments]);
 
   const handleLove = () => {
     if (!love) {
@@ -79,7 +53,7 @@ function Book() {
   };
 
   const handleSubmit = () => {
-    if (name != "" && rating != null && review != "") {
+    if (name !== "" && rating !== null && review !== "") {
       let data = { name: name, rating: rating, review: review };
       setComments([...comments, data]);
       setName("");
@@ -109,6 +83,9 @@ function Book() {
             variant="contained"
             color="primary"
             sx={{ width: "100%", bgcolor: "primary.dark" }}
+            href={book.bookLink}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Want to read
           </Button>
@@ -133,7 +110,7 @@ function Book() {
               <Rating
                 precision={0.1}
                 name="size-medium"
-                defaultValue={book.bookRating}
+                value={overallRating}
                 max={10}
                 readOnly
               />
@@ -153,7 +130,7 @@ function Book() {
             Comments
           </Typography>
           <Paper sx={{ p: "15px", mt: "10px" }}>
-            {message != "" && <Alert severity="error">{message}</Alert>}
+            {message !== "" && <Alert severity="error">{message}</Alert>}
             <Grid container spacing={2}>
               <Grid item xs={5}>
                 <TextField
