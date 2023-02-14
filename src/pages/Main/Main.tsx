@@ -1,4 +1,11 @@
-import { Avatar, Chip, Container, Grid, Typography } from "@mui/material";
+import {
+  Avatar,
+  Chip,
+  Container,
+  Grid,
+  Paper,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import AvatarPicture from "../../components/Profile/AvatarPicture";
 import ProfileHeader from "../../components/Profile/ProfileHeader";
@@ -43,15 +50,17 @@ function Main() {
 
   return (
     <Container>
-      <Grid container spacing={0} mt="15px">
-        <Grid item xs={9} sx={{ mt: "30px" }}>
-          {profileHeader}
+      <Paper sx={{ p: "20px", mt: "100px" }}>
+        <Grid container spacing={0} mt="15px">
+          <Grid item xs={9} sx={{ mt: "30px" }}>
+            {profileHeader}
+          </Grid>
+          <Grid item xs={3}>
+            {avatarPicture}
+          </Grid>
         </Grid>
-        <Grid item xs={3}>
-          {avatarPicture}
-        </Grid>
-      </Grid>
-      {bio}
+        {bio}
+      </Paper>
     </Container>
   );
 }
