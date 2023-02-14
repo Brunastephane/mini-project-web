@@ -1,6 +1,7 @@
 import React from "react";
 
-const Bio = (bio: any) => {
+const Bio = (props: any) => {
+  const {bio} = props;
   return (
     <div>
       <h4>Who I am</h4>

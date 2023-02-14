@@ -16,7 +16,8 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import { useNavigate } from "react-router-dom";
 
-const DisplayBook = (book: any, index: number) => {
+const DisplayBook = (props: any) => {
+  const {index , book} = props;
   const navigate = useNavigate();
 
   const [likeCount, setLikeCount] = useState<number>(0);
