@@ -28,20 +28,20 @@ function Book() {
 
   const { id } = useParams();
 
-  const getBookFromAPI = async () => {
-    await fetch(`http://localhost:4000/getBook?id=${id}`, { method: "get" })
+  useLayoutEffect(() => {
+    if (isLoading) {
+      getBookFromAPI(id);
+    }
+  }, [isLoading, id]);
+
+  const getBookFromAPI = async (bookID: any) => {
+    await fetch(`http://localhost:4000/getBook?id=${bookID}`, { method: "get" })
       .then((response) => response.json())
       .then((res) => {
         setBook(res);
       });
     setIsLoading(false);
   };
-
-  useLayoutEffect(() => {
-    if (isLoading) {
-      getBookFromAPI();
-    }
-  }, [isLoading]);
 
   useEffect(() => {
     if (comments) {
