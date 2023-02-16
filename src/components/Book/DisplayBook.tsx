@@ -17,7 +17,7 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import { useNavigate } from "react-router-dom";
 
 const DisplayBook = (props: any) => {
-  const {index , book} = props;
+  const { book } = props;
   const navigate = useNavigate();
 
   const [likeCount, setLikeCount] = useState<number>(0);
@@ -32,7 +32,7 @@ const DisplayBook = (props: any) => {
               variant="h5"
               sx={{ cursor: "pointer" }}
               onClick={() => {
-                navigate(`/mini-project-web/book/${index}`);
+                navigate(`/mini-project-web/book/${book.id}`);
               }}
             >
               {book.bookName}
@@ -70,7 +70,7 @@ const DisplayBook = (props: any) => {
           image={book.bookImage}
           alt="Live from space album cover"
           onClick={() => {
-            navigate(`/mini-project-web/book/${index}`);
+            navigate(`/mini-project-web/book/${book.id}`);
           }}
         />
       </Card>

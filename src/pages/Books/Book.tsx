@@ -13,7 +13,7 @@ import {
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useParams } from "react-router-dom";
-import { booksQuery } from "../../components/Book/BooksQuery";
+//import { booksQuery } from "../../components/Book/BooksQuery";
 
 function Book() {
   const [book, setBook] = useState<any>([]);
@@ -23,18 +23,25 @@ function Book() {
   const [rating, setRating] = useState<number | null>(null);
   const [overallRating, setOverallRating] = useState<number | null>(null);
   const [review, setReview] = useState<string>("");
-  const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const { id } = useParams();
 
+  const getBookFromAPI = async () => {
+    await fetch(`http://localhost:4000/getBook?id=${id}`, { method: "get" })
+      .then((response) => response.json())
+      .then((res) => {
+        setBook(res);
+      });
+    setIsLoading(false);
+  };
+
   useLayoutEffect(() => {
-    if (id && loading) {
-      // verifica se tem Id e se a pagina esta em carregamento se sim altera o state book e altera o state loading para false
-      setLoading(false);
-      setBook(booksQuery[parseInt(id)]);
+    if (isLoading) {
+      getBookFromAPI();
     }
-  }, [id, loading]); // Passar condicoes que sao utilizadas no if no final do UseLayoutEffect ou UseEffect
+  }, [isLoading]);
 
   useEffect(() => {
     if (comments) {
