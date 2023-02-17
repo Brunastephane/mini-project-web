@@ -7,7 +7,7 @@ function Books() {
   const [booksQuery, setBooksQuery] = useState<string[]>();
 
   const getBooks = async () => {
-    await fetch("http://localhost:4000/getBooks", { method: "get" })
+    await fetch(`${process.env.REACT_APP_API_URL}/getBooks`, { method: "get" })
       .then((response) => response.json())
       .then((res) => {
         setBooksQuery(res);

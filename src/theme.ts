@@ -47,6 +47,14 @@ const DefaultTheme = createTheme({
         },
       },
     },
+
+    MuiLinearProgress:{
+      styleOverrides:{
+        root:{
+          backgroundColor:"#493e57",
+        }
+      }
+    }
   },
   palette: {
     background: {

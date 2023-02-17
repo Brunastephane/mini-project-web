@@ -31,14 +31,55 @@ function Book() {
   useLayoutEffect(() => {
     if (isLoading) {
       getBookFromAPI(id);
+      getComments(id);
     }
   }, [isLoading, id]);
 
   const getBookFromAPI = async (bookID: any) => {
-    await fetch(`http://localhost:4000/getBook?id=${bookID}`, { method: "get" })
+    await fetch(`${process.env.REACT_APP_API_URL}/getBook?id=${bookID}`, {
+      method: "get",
+    })
       .then((response) => response.json())
       .then((res) => {
         setBook(res);
+      });
+    setIsLoading(false);
+  };
+
+  const addComment = async (bookID: any) => {
+    try {
+      await fetch(`${process.env.REACT_APP_API_URL}/addComment`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          rating: rating,
+          review: review,
+          bookID: parseFloat(bookID),
+        }),
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          setName("");
+          setRating(null);
+          setReview("");
+          setMessage("");
+          getComments(bookID);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getComments = async (bookID: any) => {
+    await fetch(`${process.env.REACT_APP_API_URL}/getComments?id=${bookID}`, {
+      method: "get",
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        setComments(res);
       });
     setIsLoading(false);
   };
@@ -61,12 +102,15 @@ function Book() {
 
   const handleSubmit = () => {
     if (name !== "" && rating !== null && review !== "") {
+      addComment(id);
+      /*
       let data = { name: name, rating: rating, review: review };
       setComments([...comments, data]);
       setName("");
       setRating(null);
       setReview("");
       setMessage("");
+      */
     } else {
       setMessage("Complete all fields to submit your comment.");
     }
@@ -152,7 +196,7 @@ function Book() {
               <Grid item xs={4}>
                 <Stack sx={{ mt: "15px" }}>
                   <Rating
-                    precision={0.1}
+                    precision={1.0}
                     name="size-medium"
                     max={10}
                     value={rating}
@@ -196,7 +240,7 @@ function Book() {
                 <Grid item xs={4}>
                   <Stack sx={{ mt: "15px" }}>
                     <Rating
-                      precision={0.1}
+                      precision={1.0}
                       name="size-medium"
                       max={10}
                       value={comment.rating}
