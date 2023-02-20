@@ -47,7 +47,9 @@ function Book() {
   };
 
   const addComment = async (bookID: any) => {
+
     try {
+
       await fetch(`${process.env.REACT_APP_API_URL}/addComment`, {
         method: "post",
         headers: {
@@ -68,9 +70,11 @@ function Book() {
           setMessage("");
           getComments(bookID);
         });
+        
     } catch (error) {
       console.log(error);
     }
+
   };
 
   const getComments = async (bookID: any) => {

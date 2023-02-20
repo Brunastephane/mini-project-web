@@ -20,7 +20,30 @@ const DisplayBook = (props: any) => {
   const { book } = props;
   const navigate = useNavigate();
 
-  const [likeCount, setLikeCount] = useState<number>(0);
+  const [likeCount, setLikeCount] = useState<number>(book.bookLikes);
+
+  const submitLikeChanges = async(bookId: any, like:number)=>{
+    try {
+      await fetch(`${process.env.REACT_APP_API_URL}/changeLikes`, {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: parseFloat(bookId),
+          bookLikes: likeCount + like,
+        }),
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          setLikeCount(res.bookLikes);
+        });
+        
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
 
   return (
     <Grid item xs={6}>
@@ -49,14 +72,15 @@ const DisplayBook = (props: any) => {
           <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
             <Button
               onClick={() => {
-                setLikeCount(likeCount - 1);
+                //setLikeCount(likeCount - 1);
+                submitLikeChanges(book.id , -1);
               }}
             >
               <HeartBrokenOutlinedIcon sx={{ color: "black", mr: "10px" }} />
             </Button>
             <Button
               onClick={() => {
-                setLikeCount(likeCount + 1);
+                submitLikeChanges(book.id, 1);
               }}
             >
               <FavoriteBorderOutlinedIcon sx={{ color: "black" }} />
