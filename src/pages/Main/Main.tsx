@@ -10,6 +10,7 @@ import React from "react";
 import AvatarPicture from "../../components/Profile/AvatarPicture";
 import ProfileHeader from "../../components/Profile/ProfileHeader";
 import Bio from "../../components/Profile/Bio";
+import { matchRoutes } from "react-router-dom";
 
 const skills = [
   "ReactJS",
@@ -40,18 +41,19 @@ function Main() {
     <Container>
       <Paper sx={{ p: "20px", mt: "100px" }}>
         <Grid container spacing={0} mt="15px">
-          <Grid item xs={9} sx={{ mt: "30px" }}>
+        <Grid item xs={12} md={4} >
+            <AvatarPicture
+              imgAddress={`${process.env.PUBLIC_URL}/imgperfil.jpg`}
+            />
+          </Grid>
+          <Grid item xs={12} md={8} sx={{ mt: "30px" }}>
             <ProfileHeader
               name="Bruna Stephane da Silva"
               role="Software Developer"
               skills={skills}
             />
           </Grid>
-          <Grid item xs={3}>
-            <AvatarPicture
-              imgAddress={`${process.env.PUBLIC_URL}/imgperfil.jpg`}
-            />
-          </Grid>
+          
         </Grid>
         <Bio bio={bioDetails} />
       </Paper>

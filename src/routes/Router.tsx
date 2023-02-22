@@ -9,7 +9,6 @@ function Router() {
     <BrowserRouter>
       <Navbar />
       <RouteConfig />
-      <Footer />
     </BrowserRouter>
   );
 }

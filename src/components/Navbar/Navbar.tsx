@@ -63,7 +63,7 @@ function Navbar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="primary"
             >
               <MenuIcon />
             </IconButton>
@@ -82,10 +82,11 @@ function Navbar() {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: "block", md: "none" }, 
               }}
             >
               <MenuItem
+              sx={{color: "black"}}
                 onClick={() => {
                   navigate("/mini-project-web/");
                 }}
@@ -93,6 +94,7 @@ function Navbar() {
                 <Typography textAlign="center">Home</Typography>
               </MenuItem>
               <MenuItem
+              sx={{color: "black"}}
                 onClick={() => {
                   navigate("/mini-project-web/books");
                 }}
@@ -100,6 +102,7 @@ function Navbar() {
                 <Typography textAlign="center">Books</Typography>
               </MenuItem>
               <MenuItem
+              sx={{color: "black"}}
                 onClick={() => {
                   navigate("/mini-project-web/contact");
                 }}

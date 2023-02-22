@@ -1,10 +1,12 @@
 import {
   Alert,
+  Box,
   Button,
   CircularProgress,
   Container,
   Grid,
   LinearProgress,
+  Modal,
   Paper,
   Snackbar,
   Stack,
@@ -17,6 +19,19 @@ const sleep = async (milliseconds: number) => {
   await new Promise((resolve) => {
     return setTimeout(resolve, milliseconds);
   });
+};
+
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
 };
 
 function Contact() {
@@ -34,16 +49,7 @@ function Contact() {
     setOpen(true);
   };
 
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
+  const handleClose = () => setOpen(false);
 
   useLayoutEffect(() => {
     if (loading) {
@@ -157,20 +163,19 @@ function Contact() {
               Submit
             </Button>
             {success !== "" && (
-              <Snackbar
-                open={open}
-                autoHideDuration={6000}
-                onClose={handleClose}
-                anchorOrigin={{ vertical:"top", horizontal:"center" }}
-              >
-                <Alert
-                  onClose={handleClose}
-                  severity="success"
-                  sx={{ width: "100%" }}
-                >
-                  {success}
-                </Alert>
-              </Snackbar>
+              <Modal
+              open={open}
+              onClose={handleClose}
+            ><Box 
+            sx={style}>
+            <Typography variant="h6" component="h2">
+              Success!
+            </Typography>
+            <Typography sx={{ mt: 2 }}>
+              {success}
+            </Typography>
+          </Box>
+        </Modal>
             )}
           </Grid>
         </Grid>
@@ -180,18 +185,28 @@ function Contact() {
         contactMessages.map((contactMessage: any) => (
           <Paper sx={{ p: "15px", mt: "10px" }}>
             <Grid container spacing={2}>
-              <Grid item xs={5}>
-                <Typography>Name:{contactMessage.name}</Typography>
+              <Grid item xs={12} md={6}>
+                <TextField  label="Name" variant="standard" value={contactMessage.name} 
+              sx={{ width: "100%" }}InputProps={{
+            readOnly: true,
+          }}/>
               </Grid>
-              <Grid item xs={4}>
-                <Typography>E-mail:{contactMessage.email}</Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography>Date:{contactMessage.created_at}</Typography>
-              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField label="Email" variant="standard" value={contactMessage.email} 
+              sx={{ width: "100%" }}InputProps={{
+            readOnly: true,
+          }}/>
+              </Grid>             
 
-              <Grid item xs={12}>
-                <Typography>Message:{contactMessage.message}</Typography>
+              <Grid item xs={12} md={12}>
+                <TextField rows={3} multiline  label="Message" variant="standard" value={contactMessage.message} 
+              sx={{ width: "100%" }}InputProps={{
+            readOnly: true,
+          }}/>
+                
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <Typography>Date: {contactMessage.created_at}</Typography>
               </Grid>
             </Grid>
           </Paper>

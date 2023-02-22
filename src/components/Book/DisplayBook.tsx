@@ -46,7 +46,7 @@ const DisplayBook = (props: any) => {
   }
 
   return (
-    <Grid item xs={6}>
+    <Grid item xs={12} md={6}>
       <Card sx={{ display: "flex" }}>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <CardContent sx={{ flex: "1 0 auto" }}>

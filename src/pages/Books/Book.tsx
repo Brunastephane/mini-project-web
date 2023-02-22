@@ -128,7 +128,7 @@ function Book() {
       <Typography>Author: {book.bookAuthor}</Typography>
 
       <Grid container spacing={2} sx={{ paddingTop: "40px" }}>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <img
             alt={book.bookName}
             src={book.bookImage}
@@ -156,7 +156,7 @@ function Book() {
             Love this book
           </Button>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12} md={9}>
           <Paper sx={{ p: "15px" }}>
             <Typography>
               <b>Overall Rating</b>
@@ -187,7 +187,7 @@ function Book() {
           <Paper sx={{ p: "15px", mt: "10px" }}>
             {message !== "" && <Alert severity="error">{message}</Alert>}
             <Grid container spacing={2}>
-              <Grid item xs={5}>
+              <Grid item xs={12} md={5}>
                 <TextField
                   sx={{ width: "100%" }}
                   label="Name"
@@ -197,7 +197,7 @@ function Book() {
                   }}
                 />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={8} md={4}>
                 <Stack sx={{ mt: "15px" }}>
                   <Rating
                     precision={1.0}
@@ -210,17 +210,7 @@ function Book() {
                   />
                 </Stack>
               </Grid>
-              <Grid item xs={3}>
-                <Button
-                  variant="contained"
-                  sx={{ width: "100%", mt: "10px" }}
-                  onClick={() => {
-                    handleSubmit();
-                  }}
-                >
-                  Submit
-                </Button>
-              </Grid>
+              
               <Grid item xs={12}>
                 <TextField
                   multiline
@@ -232,6 +222,17 @@ function Book() {
                     setReview(event.target.value);
                   }}
                 />
+              </Grid>
+              <Grid item xs={4} md={3}>
+                <Button
+                  variant="contained"
+                  sx={{ width: "100%", mt: "10px" }}
+                  onClick={() => {
+                    handleSubmit();
+                  }}
+                >
+                  Submit
+                </Button>
               </Grid>
             </Grid>
           </Paper>
